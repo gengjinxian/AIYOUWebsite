@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# 此处重载是为了使我们的UserProfile生效
+AUTH_USER_MODEL = "users.UserProfile"
 
 # Application definition
 
@@ -44,6 +46,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'xadmin',
     'DjangoUeditor',
+    'users.apps.UsersConfig',
+    'goods.apps.GoodsConfig',
+    'trade.apps.TradeConfig',
+    'user_operation.apps.UserOperationConfig',
 
 ]
 
@@ -88,17 +94,17 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testcon',
+        'NAME': 'aiyou',
         'USER': 'root',
         'PASSWORD':'1111111111',
         'HOST':'127.0.0.1',
         'PORT':'3306',
-        # 'OPTIONS':{'isolation_level':None}     #我加了这一句就好了,虚拟环境使用
+        # 'OPTIONS':{'isolation_level':None},     #我加了这一句就好了,虚拟环境使用
 
         # #这里引擎用innodb（默认myisam）
         # #因为后面第三方登录时，要求引擎为INNODB
         # # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'}, #这样设置会报错，改为
-        # "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"
+        # "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"},
     }
 }
 
@@ -125,15 +131,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+# TIME_ZONE = 'UTC'
+# USE_I18N = True
+# USE_L10N = True
+# USE_TZ = True
 
-TIME_ZONE = 'UTC'
+# 语言改为中文
+LANGUAGE_CODE = 'zh-hans'
+
+# 时区改为上海
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
+
 
 
 # Static files (CSS, JavaScript, Images)

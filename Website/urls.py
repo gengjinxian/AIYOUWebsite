@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.urls import path
 from django.contrib import admin
 from django.views.generic import TemplateView
 
@@ -23,6 +24,7 @@ import BookApp.urls
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^xadmin/', xadmin.site.urls),
+    path('ueditor/', include('DjangoUeditor.urls')),
     url(r'^api/', include(BookApp.urls)),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
 ]
